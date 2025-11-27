@@ -89,11 +89,14 @@ public class Reproductor extends javax.swing.JFrame {
 
         lbAlbum = new javax.swing.JLabel();
         btnStop = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
+        slVolume = new javax.swing.JSlider();
         btnTogglePlayPause = new javax.swing.JToggleButton();
         pbReproduction = new javax.swing.JProgressBar();
         lbEstado = new javax.swing.JLabel();
         lbContador = new javax.swing.JLabel();
+        lbVolDown = new javax.swing.JLabel();
+        lbVolUp = new javax.swing.JLabel();
+        lbShowVolume = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +108,14 @@ public class Reproductor extends javax.swing.JFrame {
         btnStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStopActionPerformed(evt);
+            }
+        });
+
+        slVolume.setMajorTickSpacing(5);
+        slVolume.setMinorTickSpacing(1);
+        slVolume.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slVolumeStateChanged(evt);
             }
         });
 
@@ -120,6 +131,15 @@ public class Reproductor extends javax.swing.JFrame {
 
         lbContador.setText("00:00");
 
+        lbVolDown.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbVolDown.setText("-");
+
+        lbVolUp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbVolUp.setText("+");
+
+        lbShowVolume.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbShowVolume.setText("50");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,7 +152,14 @@ public class Reproductor extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbVolDown, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(lbShowVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbVolUp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(slVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(lbAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -159,12 +186,17 @@ public class Reproductor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pbReproduction, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnTogglePlayPause, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(slVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbVolDown)
+                            .addComponent(lbVolUp)
+                            .addComponent(lbShowVolume))))
                 .addContainerGap())
         );
 
@@ -202,6 +234,10 @@ public class Reproductor extends javax.swing.JFrame {
         btnTogglePlayPause.setIcon(new ImageIcon(getClass().getResource(imgPlay)));
     }//GEN-LAST:event_btnStopActionPerformed
 
+    private void slVolumeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slVolumeStateChanged
+        lbShowVolume.setText(String.valueOf(slVolume.getValue()));
+    }//GEN-LAST:event_slVolumeStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -230,10 +266,13 @@ public class Reproductor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStop;
     private javax.swing.JToggleButton btnTogglePlayPause;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JLabel lbAlbum;
     private javax.swing.JLabel lbContador;
     private javax.swing.JLabel lbEstado;
+    private javax.swing.JLabel lbShowVolume;
+    private javax.swing.JLabel lbVolDown;
+    private javax.swing.JLabel lbVolUp;
     private javax.swing.JProgressBar pbReproduction;
+    private javax.swing.JSlider slVolume;
     // End of variables declaration//GEN-END:variables
 }
